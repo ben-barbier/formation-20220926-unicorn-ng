@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { map } from 'rxjs';
 import { SpinnerService } from './shared/services/spinner.service';
 
 @Component({
@@ -9,10 +10,13 @@ import { SpinnerService } from './shared/services/spinner.service';
 export class AppComponent {
   title = 'unicorn-ng 🚀';
 
-  constructor(public spinnerService: SpinnerService) {}
+  // 👇: Implem explicite
+  public pendingRequests = 0;
 
-  getYear = () => {
-    console.count('getYear');
-    return new Date().getFullYear();
-  };
+  // 👇: Implem implicite (mieux)
+  public hasPendingRequests$ = this.spinnerService.pendingRequests$.pipe(map((pendingRequests) => pendingRequests > 0));
+
+  constructor(public spinnerService: SpinnerService) {
+    spinnerService.pendingRequests$.subscribe((pendingRequests) => (this.pendingRequests = pendingRequests));
+  }
 }

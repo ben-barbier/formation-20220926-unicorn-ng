@@ -1,5 +1,7 @@
 <h1>{{ title }}</h1>
 
-<app-spinner *ngIf="spinnerService.currentRequests > 0"></app-spinner>
+<div>PendingRequests: {{ hasPendingRequests$ | async }}</div>
+
+<app-spinner *ngIf="hasPendingRequests$ | async"></app-spinner>
 
 <app-unicorn-list></app-unicorn-list>
