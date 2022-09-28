@@ -11,6 +11,8 @@ import { UnicornListComponent } from './pages/unicorn-list/unicorn-list.componen
 import { SpinnerComponent } from './shared/components/spinner/spinner.component';
 import { PendingRequestsInterceptor } from './shared/interceptors/pending-requests.interceptor';
 import { MagicalNamePipe } from './shared/pipes/magical-name.pipe';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -22,7 +24,12 @@ import { MagicalNamePipe } from './shared/pipes/magical-name.pipe';
     UnicornDetailsComponent,
     NavComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule, ReactiveFormsModule],
+  imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule, ReactiveFormsModule, ServiceWorkerModule.register('ngsw-worker.js', {
+  enabled: environment.production,
+  // Register the ServiceWorker as soon as the application is stable
+  // or after 30 seconds (whichever comes first).
+  registrationStrategy: 'registerWhenStable:30000'
+})],
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: PendingRequestsInterceptor, multi: true }],
   bootstrap: [AppComponent],
 })
