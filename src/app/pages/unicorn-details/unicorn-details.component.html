@@ -1,0 +1,9 @@
+<pre>{{ unicorn | json }}</pre>
+
+Formulaire pour MAJ nom + birthyear Une licorne ne peut pas avoir plus de 200 ans
+
+<form [formGroup]="unicornForm" (ngSubmit)="update()">
+  <input type="text" formControlName="name" />
+  <input type="number" formControlName="birthyear" />
+  <button type="submit" [disabled]="unicornForm.invalid">Modifier</button>
+</form>

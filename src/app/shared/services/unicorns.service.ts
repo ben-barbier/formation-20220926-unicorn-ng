@@ -29,8 +29,8 @@ export class UnicornsService {
     return this.http.put<UnicornDTO>(`${environment.apiUrl}/unicorns/${unicorn.id}`, unicorn);
   }
 
-  public get(unicorn: UnicornDTO): Observable<UnicornDTO> {
-    return this.http.get<UnicornDTO>(`${environment.apiUrl}/unicorns/${unicorn.id}`);
+  public get(id: number): Observable<UnicornDTO> {
+    return this.http.get<UnicornDTO>(`${environment.apiUrl}/unicorns/${id}`);
   }
 
   public delete(unicorn: UnicornDTO): Observable<void> {
