@@ -1,0 +1,7 @@
+<p>Bonne nouvelle, il reste {{ unicorns.length }} licornes à adopter 🚀 !!!</p>
+
+<div class="cards-container">
+  <app-unicorn-card *ngFor="let unicorn of unicorns" [unicorn]="unicorn" (removed)="removeUnicornFromList($event)">
+    Coucou !!!
+  </app-unicorn-card>
+</div>

@@ -1,18 +1,27 @@
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { UnicornCardComponent } from './pages/unicorn-list/unicorn-card/unicorn-card.component';
+import { UnicornListComponent } from './pages/unicorn-list/unicorn-list.component';
+import { HourComponent } from './shared/components/hour/hour.component';
+import { SpinnerComponent } from './shared/components/spinner/spinner.component';
+import { PendingRequestsInterceptor } from './shared/interceptors/pending-requests.interceptor';
+import { MagicalNamePipe } from './shared/pipes/magical-name.pipe';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    HourComponent,
+    UnicornListComponent,
+    MagicalNamePipe,
+    UnicornCardComponent,
+    SpinnerComponent,
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
+  imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule],
+  providers: [{ provide: HTTP_INTERCEPTORS, useClass: PendingRequestsInterceptor, multi: true }],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

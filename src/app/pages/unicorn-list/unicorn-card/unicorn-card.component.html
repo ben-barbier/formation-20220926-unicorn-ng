@@ -1,0 +1,10 @@
+<div>id: {{ unicorn.id }}</div>
+<div>name: {{ unicorn.name | magicalName }}</div>
+<div>weight: {{ unicorn.weight }}</div>
+<div [ngClass]="{ old: age > 40 }">age: {{ age }}</div>
+<div>hobbies: {{ unicorn.hobbies }}</div>
+<div>capacities: {{ unicorn.capacities }}</div>
+
+<button type="button" (click)="delete(unicorn)">DELETE</button>
+
+<div>message: <ng-content></ng-content></div>
